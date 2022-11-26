@@ -68,7 +68,7 @@ def randomColor():
     return (randint(0, 255), randint(0, 255), randint(0, 255))
 
 def CheckBox():
-    #if len(Box_list) < 10:
+    if len(Box_list) < 10:
         Box_list.append(MovingBox(screen))
 
 def AllBoxMove():
