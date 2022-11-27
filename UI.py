@@ -19,8 +19,8 @@ WHITE = (255,255,255)
 
 Title_Font = pygame.font.SysFont("malgungothic", 40)
 Font = pygame.font.SysFont("malgungothic", 30)
-screen_width = 640
-screen_height = 480
+screen_width = 480
+screen_height = 640
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Mini Game")
 
