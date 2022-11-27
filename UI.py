@@ -98,7 +98,7 @@ while running:
     BG_Animation()
     if Page == 1:
         screen.blit(Title.text, Title.rect)
-        screen.blit(Game_Start.text, Title.rect)
+        screen.blit(Game_Start.text, Game_Start.rect)
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == QUIT:
