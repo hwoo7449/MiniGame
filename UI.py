@@ -76,21 +76,29 @@ def AllBoxMove():
         i.Move()
         i.Draw()
 
+def BG_Animation():
+    CheckBox()
+    AllBoxMove()
+
 
 Title = Text("Mini Game", BLACK, Title_Font)
 Title.rect.centerx = round(screen_width / 2)
 Title.rect.y = 50
+
+Game_Start = Text("Game Start", BLACK, Font)
+Game_Start.rect.centerx = round(screen_width / 2)
+Game_Start.rect.centery = round(screen_height / 2)
 
 Page = 1
 running = True
 while running:
     screen.fill(WHITE)
 
-    CheckBox()
-    AllBoxMove()
-
+    
+    BG_Animation()
     if Page == 1:
         screen.blit(Title.text, Title.rect)
+        screen.blit(Game_Start.text, Game_Start.rect)
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -99,5 +107,5 @@ while running:
     FramePerSec.tick(FPS)
 
 
-pygame.quit()
+pygame.quit() 
 sys.exit()
