@@ -5,6 +5,7 @@ from pygame.locals import *
 import Modules.Functions as F
 import Games.bricksBreak.main as bricksBreak
 import Games.bomb_Game.main as bomb_Game
+import Games.minesweeper.main as minesweeper
 
 pygame.init()
 
@@ -95,8 +96,13 @@ while running:
             if event.type == MOUSEBUTTONDOWN:
                 if Check_mouse_pos(mouse_pos, Game1.rect):
                     bricksBreak.main()
+                    screen = pygame.display.set_mode((screen_width, screen_height))
                 elif Check_mouse_pos(mouse_pos, Game2.rect):
                     bomb_Game.main()
+                    screen = pygame.display.set_mode((screen_width, screen_height))
+                elif Check_mouse_pos(mouse_pos, Game3.rect):
+                    minesweeper.main()
+                    screen = pygame.display.set_mode((screen_width, screen_height))
 
 
 
