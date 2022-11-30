@@ -2,12 +2,16 @@ import sys
 import pygame
 from random import randint
 from pygame.locals import *
+import Modules.Functions as F
+import Games.bricksBreak.main as bricksBreak
+import Games.bomb_Game.main as bomb_Game
+import Games.minesweeper.main as minesweeper
 
 pygame.init()
 
 
 FPS = 30
-FramePerSec = pygame.time.Clock()
+clock = pygame.time.Clock()
 
 
 BLUE = (0,0,255)
@@ -23,88 +27,89 @@ screen_width = 480
 screen_height = 640
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Mini Game")
-
-
-class Text:
-    def __init__(self, text, color = BLACK, font = Font):
-        self.font = font
-        self.color = color
-        self.text = font.render(text, True, color)
-        self.rect = self.text.get_rect()
-
-Box_list = []
-class MovingBox:
-    global Box_list
-
-    def __init__(self, screen: pygame.Surface):
-        self.screen = screen
-        self.color = randomColor()
-        self.size_width = 10
-        self.size_height = 10
-        self.pos_x = (screen.get_width() + self.size_width)
-        self.pos_y = randint(10, screen.get_height() - self.size_height)
-        self.rect = [ self.pos_x, self.pos_y, self.size_width, self.size_height ]
-        self.dx = -randint(5, 15)
-
-    def Add(self):
-        Box_list.append(self)
-
-    def Del(self):
-        Box_list.remove(self)
-        del self
-        return
-
-    def Draw(self):
-        if self.rect[0] < -self.size_width:
-            self.Del()
-            return
-
-        pygame.draw.rect(self.screen, self.color, self.rect)
-
-    def Move(self):
-        self.rect[0] += self.dx
+      
 
 def randomColor():
     return (randint(0, 255), randint(0, 255), randint(0, 255))
 
-def CheckBox():
-    if len(Box_list) < 10:
-        Box_list.append(MovingBox(screen))
+def dark_randomColor():
+    return (randint(0, 200), randint(0, 200), randint(0, 200))
 
-def AllBoxMove():
-    for i in Box_list:
-        i.Move()
-        i.Draw()
+def Check_mouse_pos(mouse_pos, Rect):
+    if mouse_pos[0] > Rect.left and mouse_pos[0] < Rect.right and mouse_pos[1] > Rect.top and mouse_pos[1] < Rect.bottom:
+        return True
+    else:
+        return False
 
-def BG_Animation():
-    CheckBox()
-    AllBoxMove()
-
-
-Title = Text("Mini Game", BLACK, Title_Font)
+Title = F.Text("Mini Game", Title_Font)
 Title.rect.centerx = round(screen_width / 2)
 Title.rect.y = 50
 
-Game_Start = Text("Game Start", BLACK, Font)
+Game_Start = F.Text("게임 시작", Font)
 Game_Start.rect.centerx = round(screen_width / 2)
 Game_Start.rect.centery = round(screen_height / 2)
+
+Game_List = F.Text("게임 목록", Font)
+Game_List.rect.centerx = round(screen_width / 2)
+Game_List.rect.centery = round(screen_height * (1/10))
+
+Game1 = F.Text("벽돌깨기", Font, dark_randomColor())
+Game1.rect.centerx = round(screen_width * (1/3))
+Game1.rect.centery = round(screen_height * (2/10))
+
+Game2 = F.Text("폭탄 피하기", Font, dark_randomColor())
+Game2.rect.centerx = round(screen_width * (2/3))
+Game2.rect.centery = round(screen_height * (2/10))
+
+Game3 = F.Text("지뢰찾기", Font, dark_randomColor())
+Game3.rect.centerx = round(screen_width * (1/3))
+Game3.rect.centery = round(screen_height * (3/10))
+
+Game4 = F.Text("오목", Font, dark_randomColor())
+Game4.rect.centerx = round(screen_width * (2/3))
+Game4.rect.centery = round(screen_height * (3/10))
 
 Page = 1
 running = True
 while running:
     screen.fill(WHITE)
 
-    
-    BG_Animation()
     if Page == 1:
-        screen.blit(Title.text, Title.rect)
-        screen.blit(Game_Start.text, Game_Start.rect)
+        Title.Draw(screen)
+        Game_Start.Draw(screen)
+    elif Page == 2:
+        Game_List.Draw(screen)
+        Game1.Draw(screen)
+        Game2.Draw(screen)
+        Game3.Draw(screen)
+        Game4.Draw(screen)
+
     pygame.display.update()
     for event in pygame.event.get():
+        mouse_pos = pygame.mouse.get_pos()
         if event.type == QUIT:
             running = False
-    
-    FramePerSec.tick(FPS)
+        
+        if Page == 1:
+            if event.type == MOUSEBUTTONDOWN:
+                if Check_mouse_pos(mouse_pos, Game_Start.rect):
+                    Page += 1
+        
+        if Page == 2:
+            if event.type == MOUSEBUTTONDOWN:
+                if Check_mouse_pos(mouse_pos, Game1.rect):
+                    bricksBreak.main()
+                    screen = pygame.display.set_mode((screen_width, screen_height))
+                elif Check_mouse_pos(mouse_pos, Game2.rect):
+                    bomb_Game.main()
+                    screen = pygame.display.set_mode((screen_width, screen_height))
+                elif Check_mouse_pos(mouse_pos, Game3.rect):
+                    minesweeper.main()
+                    screen = pygame.display.set_mode((screen_width, screen_height))
+
+
+
+    clock.tick(FPS)
 
 
 pygame.quit() 
