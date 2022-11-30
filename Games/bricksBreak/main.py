@@ -43,13 +43,14 @@ def main():
         paddle = pygame.Rect(screen_width // 2 - 80 // 2, screen_height - 16, 80, 16)
         paddle_dx = 0
 
-        while True: 
+        running = True
+        while running: 
             clock.tick(60)
             screen.fill(BLACK) 
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    break
+                    running = False
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
                         paddle_dx = -5
