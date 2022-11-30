@@ -1,11 +1,12 @@
 import pygame
 import os
 import random
+
 os.chdir("Games/bomb_Game")
 
 def main():
-    pygame.init()
 
+    pygame.init()
 
     BLACK = (0, 0, 0)
     size = [600, 800]

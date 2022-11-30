@@ -1,4 +1,4 @@
-import sys
+import sys, os
 import pygame
 from random import randint
 from pygame.locals import *
@@ -6,6 +6,7 @@ import Modules.Functions as F
 import Games.bricksBreak.main as bricksBreak
 import Games.bomb_Game.main as bomb_Game
 import Games.minesweeper.main as minesweeper
+# import Games.Omok.main as Omok
 
 pygame.init()
 
@@ -89,7 +90,7 @@ while running:
         mouse_pos = pygame.mouse.get_pos()
         if event.type == QUIT:
             running = False
-        
+
         if Page == 1:
             if event.type == MOUSEBUTTONDOWN:
                 if Check_mouse_pos(mouse_pos, Game_Start.rect):
@@ -106,6 +107,8 @@ while running:
                 elif Check_mouse_pos(mouse_pos, Game3.rect):
                     minesweeper.main()
                     screen = pygame.display.set_mode((screen_width, screen_height))
+                # elif Check_mouse_pos(mouse_pos, Game4.rect):
+                #     Omok.main()
 
 
 
