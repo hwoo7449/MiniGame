@@ -1,6 +1,6 @@
 import pygame, sys, os
 from pygame.locals import *
-from rule import *
+from Games.Omok.rule import *
 
 bg_color = (128, 128, 128)
 black = (0, 0, 0)
@@ -265,7 +265,7 @@ class Menu(object):
     
     def terminate(self):
         pygame.quit()
-        sys.exit()
+        os.chdir("Games/Omok")
 
     def is_continue(self, omok):
         while True:
