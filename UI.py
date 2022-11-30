@@ -1,4 +1,4 @@
-import sys
+import sys, os
 import pygame
 from random import randint
 from pygame.locals import *
@@ -6,8 +6,9 @@ import Modules.Functions as F
 import Games.bricksBreak.main as bricksBreak
 import Games.bomb_Game.main as bomb_Game
 import Games.minesweeper.main as minesweeper
-# import Games.Omok.main as Omok
+import Games.Omok.main as Omok
 
+# os.chdir()
 pygame.init()
 
 
