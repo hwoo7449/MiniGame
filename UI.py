@@ -32,6 +32,9 @@ pygame.display.set_caption("Mini Game")
 def randomColor():
     return (randint(0, 255), randint(0, 255), randint(0, 255))
 
+def dark_randomColor():
+    return (randint(0, 200), randint(0, 200), randint(0, 200))
+
 def Check_mouse_pos(mouse_pos, Rect):
     if mouse_pos[0] > Rect.left and mouse_pos[0] < Rect.right and mouse_pos[1] > Rect.top and mouse_pos[1] < Rect.bottom:
         return True
@@ -50,19 +53,19 @@ Game_List = F.Text("게임 목록", Font)
 Game_List.rect.centerx = round(screen_width / 2)
 Game_List.rect.centery = round(screen_height * (1/10))
 
-Game1 = F.Text("벽돌깨기", Font, randomColor())
+Game1 = F.Text("벽돌깨기", Font, dark_randomColor())
 Game1.rect.centerx = round(screen_width * (1/3))
 Game1.rect.centery = round(screen_height * (2/10))
 
-Game2 = F.Text("폭탄 피하기", Font, randomColor())
+Game2 = F.Text("폭탄 피하기", Font, dark_randomColor())
 Game2.rect.centerx = round(screen_width * (2/3))
 Game2.rect.centery = round(screen_height * (2/10))
 
-Game3 = F.Text("지뢰찾기", Font, randomColor())
+Game3 = F.Text("지뢰찾기", Font, dark_randomColor())
 Game3.rect.centerx = round(screen_width * (1/3))
 Game3.rect.centery = round(screen_height * (3/10))
 
-Game4 = F.Text("오목", Font, randomColor())
+Game4 = F.Text("오목", Font, dark_randomColor())
 Game4.rect.centerx = round(screen_width * (2/3))
 Game4.rect.centery = round(screen_height * (3/10))
 
