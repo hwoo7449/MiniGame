@@ -4,6 +4,7 @@ from random import randint
 from pygame.locals import *
 import Modules.Functions as F
 import Games.bricksBreak.main as bricksBreak
+import Games.bomb_Game.main as bomb_Game
 
 pygame.init()
 
@@ -49,20 +50,20 @@ Game_List.rect.centerx = round(screen_width / 2)
 Game_List.rect.centery = round(screen_height * (1/10))
 
 Game1 = F.Text("벽돌깨기", Font, randomColor())
-Game1.rect.centerx = round(screen_width / 2)
-Game1.rect.centery = round(screen_height * (3/10))
+Game1.rect.centerx = round(screen_width * (1/3))
+Game1.rect.centery = round(screen_height * (2/10))
 
 Game2 = F.Text("폭탄 피하기", Font, randomColor())
-Game2.rect.centerx = round(screen_width / 2)
-Game2.rect.centery = round(screen_height * (5/10))
+Game2.rect.centerx = round(screen_width * (2/3))
+Game2.rect.centery = round(screen_height * (2/10))
 
 Game3 = F.Text("지뢰찾기", Font, randomColor())
-Game3.rect.centerx = round(screen_width / 2)
-Game3.rect.centery = round(screen_height * (7/10))
+Game3.rect.centerx = round(screen_width * (1/3))
+Game3.rect.centery = round(screen_height * (3/10))
 
 Game4 = F.Text("오목", Font, randomColor())
-Game4.rect.centerx = round(screen_width / 2)
-Game4.rect.centery = round(screen_height * (9/10))
+Game4.rect.centerx = round(screen_width * (2/3))
+Game4.rect.centery = round(screen_height * (3/10))
 
 Page = 1
 running = True
@@ -94,6 +95,8 @@ while running:
             if event.type == MOUSEBUTTONDOWN:
                 if Check_mouse_pos(mouse_pos, Game1.rect):
                     bricksBreak.main()
+                elif Check_mouse_pos(mouse_pos, Game2.rect):
+                    bomb_Game.main()
 
 
 
