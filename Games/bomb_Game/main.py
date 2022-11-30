@@ -1,7 +1,6 @@
 import pygame
 import os
 import random
-os.chdir("Games/bomb_Game")
 
 def main():
     pygame.init()
@@ -15,7 +14,7 @@ def main():
     clock = pygame.time.Clock()
 
     def runGame():
-        bomb_image = pygame.image.load('bomb.png')
+        bomb_image = pygame.image.load('Games/bomb_Game/bomb.png')
         bomb_image = pygame.transform.scale(bomb_image, (50, 50))
         bombs = []
 

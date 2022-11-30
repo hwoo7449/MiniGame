@@ -6,7 +6,7 @@ import Modules.Functions as F
 import Games.bricksBreak.main as bricksBreak
 import Games.bomb_Game.main as bomb_Game
 import Games.minesweeper.main as minesweeper
-import Games.Omok.main as Omok
+# import Games.Omok.main as Omok
 
 pygame.init()
 
@@ -107,8 +107,8 @@ while running:
                 elif Check_mouse_pos(mouse_pos, Game3.rect):
                     minesweeper.main()
                     screen = pygame.display.set_mode((screen_width, screen_height))
-                elif Check_mouse_pos(mouse_pos, Game4.rect):
-                    Omok.main()
+                #elif Check_mouse_pos(mouse_pos, Game4.rect):
+                #    Omok.main()
 
 
 
