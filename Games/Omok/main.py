@@ -1,5 +1,6 @@
 import pygame, sys, os
 from pygame.locals import *
+import time
 from Games.Omok.rule import *
 
 bg_color = (128, 128, 128)
@@ -11,30 +12,41 @@ green = (0, 200, 0)
 
 window_width = 800
 window_height = 500
-board_width = 500
+board_width = 300
 grid_size = 30
+
+First = True
+Running = True
+
+Img_Dir = 'Resource/Omok/'
 
 fps = 60
 fps_clock = pygame.time.Clock()
 
 def main():
+    global Running
+    Running = True
     pygame.init()
-    surface = pygame.display.set_mode((window_width, window_height))
-    pygame.display.set_caption("Omok game")
-    surface.fill(bg_color)
+    screen = pygame.display.set_mode((window_width, window_height))
+    #pygame.display.set_caption("Omok game")
+    screen.fill(bg_color)
 
-    omok = Omok(surface)
-    menu = Menu(surface)
-    while True:
-        run_game(surface, omok, menu)
+    omok = Omok(screen)
+    menu = Menu(screen)
+    while Running:
+        run_game(screen, omok, menu)
         menu.is_continue(omok)
 
 def run_game(surface, omok, menu):
+    global First
+    global Running
     omok.init_game()
-    while True:
+    while Running:
         for event in pygame.event.get():
             if event.type == QUIT:
                 menu.terminate()
+                Running = False
+                return
             elif event.type == MOUSEBUTTONUP:
                 if not omok.check_board(event.pos):
                     if menu.check_rect(event.pos, omok):
@@ -43,6 +55,8 @@ def run_game(surface, omok, menu):
         if omok.is_gameover:
             return
 
+        if Running == False:
+            return
         pygame.display.update()
         fps_clock.tick(fps)
 
@@ -68,11 +82,11 @@ class Omok(object):
         self.is_gameover = False
 
     def set_image_font(self):
-        black_img = pygame.image.load('image/black.png')
-        white_img = pygame.image.load('image/white.png')
-        self.last_w_img = pygame.image.load('image/white_a.png')
-        self.last_b_img = pygame.image.load('image/black_a.png')
-        self.board_img = pygame.image.load('image/board.png')
+        black_img = pygame.image.load(Img_Dir + 'image/black.png')
+        white_img = pygame.image.load(Img_Dir + 'image/white.png')
+        self.last_w_img = pygame.image.load(Img_Dir + 'image/white_a.png')
+        self.last_b_img = pygame.image.load(Img_Dir + 'image/black_a.png')
+        self.board_img = pygame.image.load(Img_Dir + 'image/board.png')
         self.font = pygame.font.Font("freesansbold.ttf", 14)
         self.black_img = pygame.transform.scale(black_img, (grid_size, grid_size))
         self.white_img = pygame.transform.scale(white_img, (grid_size, grid_size))
@@ -264,17 +278,26 @@ class Menu(object):
         return False
     
     def terminate(self):
-        pygame.quit()
-        os.chdir("Games/Omok")
+        global Running
+        Running = False
+        return
 
     def is_continue(self, omok):
-        while True:
+        global First
+        global Running
+        while Running:
             for event in pygame.event.get():
                 if event.type == QUIT:
                     self.terminate()
+                    Running = False
+                    return
                 elif event.type == MOUSEBUTTONUP:
                     if (self.check_rect(event.pos, omok)):
                         return
+            
+            if First == True:
+                time.sleep(0.2)
+                First = False
             pygame.display.update()
             fps_clock.tick(fps)    
 

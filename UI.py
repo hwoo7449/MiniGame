@@ -6,7 +6,8 @@ import Modules.Functions as F
 import Games.bricksBreak.main as bricksBreak
 import Games.bomb_Game.main as bomb_Game
 import Games.minesweeper.main as minesweeper
-# import Games.Omok.main as Omok
+import Games.Omok.main as Omok
+import time
 
 pygame.init()
 
@@ -24,8 +25,8 @@ WHITE = (255,255,255)
 
 Title_Font = pygame.font.SysFont("malgungothic", 40)
 Font = pygame.font.SysFont("malgungothic", 30)
-screen_width = 480
-screen_height = 640
+screen_width = 800
+screen_height = 500
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Mini Game")
       
@@ -95,6 +96,8 @@ while running:
             if event.type == MOUSEBUTTONDOWN:
                 if Check_mouse_pos(mouse_pos, Game_Start.rect):
                     Page += 1
+                    
+                    
         
         if Page == 2:
             if event.type == MOUSEBUTTONDOWN:
@@ -107,8 +110,9 @@ while running:
                 elif Check_mouse_pos(mouse_pos, Game3.rect):
                     minesweeper.main()
                     screen = pygame.display.set_mode((screen_width, screen_height))
-                # elif Check_mouse_pos(mouse_pos, Game4.rect):
-                #     Omok.main()
+                elif Check_mouse_pos(mouse_pos, Game4.rect):
+                    Omok.main()
+                    screen = pygame.display.set_mode((screen_width, screen_height))
 
 
 

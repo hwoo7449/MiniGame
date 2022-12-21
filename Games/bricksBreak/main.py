@@ -1,6 +1,7 @@
 import pygame
 import random
 import time
+import Modules.Functions as F
 
 def main():
     pygame.init() 
@@ -13,12 +14,13 @@ def main():
     YELLOW = (255, 255, 0)
     large_font = pygame.font.SysFont("malgungothic", 72)
     small_font = pygame.font.SysFont("malgungothic", 36)
-    screen_width = 600
-    screen_height = 800
+    screen_width = 800
+    screen_height = 500
     screen = pygame.display.set_mode((screen_width, screen_height)) 
 
     clock = pygame.time.Clock() 
 
+    Font = pygame.font.SysFont("malgungothic", 30)
     
 
     def runGame():
@@ -29,7 +31,7 @@ def main():
         game_over = 0
 
         bricks = []
-        COLUMN_COUNT = 8
+        COLUMN_COUNT = 11
         ROW_COUNT = 7
         for column_index in range(COLUMN_COUNT):
             for row_index in range(ROW_COUNT):
@@ -53,9 +55,9 @@ def main():
                     running = False
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
-                        paddle_dx = -5
+                        paddle_dx = -10
                     elif event.key == pygame.K_RIGHT:
-                        paddle_dx = 5
+                        paddle_dx = 10
                 elif event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT:
                         paddle_dx = 0
@@ -129,6 +131,13 @@ def main():
                 elif game_over == FAILURE:
                     failure_image = large_font.render('실패', True, RED)
                     screen.blit(failure_image, failure_image.get_rect(centerx=screen_width // 2, centery=screen_height // 2))
+
+                    while True:
+                        pygame.display.update()
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                running = False
+                                return
 
             pygame.display.update()
 

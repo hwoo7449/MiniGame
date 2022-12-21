@@ -1,22 +1,27 @@
 import pygame
 import os
 import random
+import Modules.Functions as F
 
-os.chdir("Games/bomb_Game")
+Img_Dir = 'Resource/bomb_Game/'
+
 
 def main():
 
     pygame.init()
 
     BLACK = (0, 0, 0)
-    size = [600, 800]
+    WHITE = (255, 255, 255)
+    size = [800, 500]
     screen = pygame.display.set_mode(size) 
 
-    done = False
+    Font = pygame.font.SysFont("malgungothic", 30)
+
     clock = pygame.time.Clock()
 
     def runGame():
-        bomb_image = pygame.image.load('bomb.png')
+
+        bomb_image = pygame.image.load(Img_Dir + 'bomb.png')
         bomb_image = pygame.transform.scale(bomb_image, (50, 50))
         bombs = []
 
@@ -27,7 +32,7 @@ def main():
             dy = random.randint(3, 9)
             bombs.append({'rect': rect, 'dy': dy})
 
-        person_image = pygame.image.load('person.png')
+        person_image = pygame.image.load(Img_Dir + 'person.png')
         person_image = pygame.transform.scale(person_image, (100, 100))
         person = pygame.Rect(person_image.get_rect())
         person.left = size[0] // 2 - person.width // 2
@@ -35,6 +40,7 @@ def main():
         person_dx = 0
         person_dy = 0
 
+        done = False
         running = True
         while running:
             clock.tick(30)
@@ -77,6 +83,19 @@ def main():
                 if bomb['rect'].colliderect(person):
                     done = True
                 screen.blit(bomb_image, bomb['rect'])
+            
+            if done:
+                GO = F.Text("Game Over", Font, WHITE)
+                GO.rect.centerx = round(size[0] / 2)
+                GO.rect.centery = round(size[1] / 2)
+
+                while True:
+                    GO.Draw(screen)
+                    pygame.display.update()
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            running = False
+                            return
 
             pygame.display.update()
 
