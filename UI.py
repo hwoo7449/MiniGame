@@ -55,19 +55,19 @@ Game_List.rect.centerx = round(screen_width / 2)
 Game_List.rect.centery = round(screen_height * (1/10))
 
 Game1 = F.Text("벽돌깨기", Font, dark_randomColor())
-Game1.rect.centerx = round(screen_width * (1/5))
-Game1.rect.centery = round(screen_height * (2/10))
+Game1.rect.centerx = round(screen_width * (3/10))
+Game1.rect.centery = round(screen_height * (3/10))
 
 Game2 = F.Text("폭탄 피하기", Font, dark_randomColor())
-Game2.rect.centerx = round(screen_width * (3/5))
-Game2.rect.centery = round(screen_height * (2/10))
+Game2.rect.centerx = round(screen_width * (7/10))
+Game2.rect.centery = round(screen_height * (3/10))
 
 Game3 = F.Text("지뢰찾기", Font, dark_randomColor())
-Game3.rect.centerx = round(screen_width * (1/5))
+Game3.rect.centerx = round(screen_width * (3/10))
 Game3.rect.centery = round(screen_height * (7/10))
 
 Game4 = F.Text("오목", Font, dark_randomColor())
-Game4.rect.centerx = round(screen_width * (3/5))
+Game4.rect.centerx = round(screen_width * (7/10))
 Game4.rect.centery = round(screen_height * (7/10))
 
 Page = 1
