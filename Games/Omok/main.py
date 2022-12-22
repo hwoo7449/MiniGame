@@ -87,7 +87,7 @@ class Omok(object):
         self.last_w_img = pygame.image.load(Img_Dir + 'image/white_a.png')
         self.last_b_img = pygame.image.load(Img_Dir + 'image/black_a.png')
         self.board_img = pygame.image.load(Img_Dir + 'image/board.png')
-        self.font = pygame.font.Font("freesansbold.ttf", 14)
+        self.font = pygame.font.SysFont("malgungothic", 14)
         self.black_img = pygame.transform.scale(black_img, (grid_size, grid_size))
         self.white_img = pygame.transform.scale(white_img, (grid_size, grid_size))
 
@@ -218,24 +218,24 @@ class Omok(object):
         
 class Menu(object):
     def __init__(self, surface):
-        self.font = pygame.font.Font('freesansbold.ttf', 20)
+        self.font = pygame.font.SysFont("malgungothic", 20, True)
         self.surface = surface
         self.draw_menu()
 
     def draw_menu(self):
         top, left = window_height - 30, window_width - 200
-        self.new_rect = self.make_text(self.font, 'New Game', blue, None, top - 30, left)
-        self.quit_rect = self.make_text(self.font, 'Quit Game', blue, None, top, left)
-        self.show_rect = self.make_text(self.font, 'Hide Number  ', blue, None, top - 60, left)
-        self.undo_rect = self.make_text(self.font, 'Undo', blue, None, top - 150, left)
-        self.uall_rect = self.make_text(self.font, 'Undo All', blue, None, top - 120, left)
-        self.redo_rect = self.make_text(self.font, 'Redo', blue, None, top - 90, left)
+        self.new_rect = self.make_text(self.font, '새 게임', black, None, top - 30, left)
+        self.quit_rect = self.make_text(self.font, '게임 종료', black, None, top, left)
+        self.show_rect = self.make_text(self.font, '숫자 숨기기  ', black, None, top - 60, left)
+        self.undo_rect = self.make_text(self.font, '뒤로', black, None, top - 150, left)
+        self.uall_rect = self.make_text(self.font, '모두 뒤로', black, None, top - 120, left)
+        self.redo_rect = self.make_text(self.font, '앞으로', black, None, top - 90, left)
 
     def show_msg(self, msg_id):
         msg = {
             empty : '                                    ',
-            black_stone: 'Black win!!!',
-            white_stone: 'White win!!!',
+            black_stone: '흑돌 승!!!',
+            white_stone: '백돌 승!!!',
             tie: 'Tie',
         }
         center_x = window_width - (window_width - board_width) // 2
@@ -254,11 +254,11 @@ class Menu(object):
     def show_hide(self, omok):
         top, left = window_height - 90, window_width - 200
         if omok.is_show:
-            self.make_text(self.font, 'Show Number', blue, bg_color, top, left)
+            self.make_text(self.font, '숫자 보이기', black, bg_color, top, left)
             omok.hide_numbers()
             omok.is_show = False
         else:
-            self.make_text(self.font, 'Hide Number  ', blue, bg_color, top, left)
+            self.make_text(self.font, '숫자 숨기기  ', black, bg_color, top, left)
             omok.show_numbers()
             omok.is_show = True
 

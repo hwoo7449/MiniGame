@@ -25,7 +25,7 @@ def main():
 
     def runGame():
         score = 0
-        missed = 0
+        missed = 3
         SUCCESS = 1
         FAILURE = 2
         game_over = 0
@@ -39,8 +39,8 @@ def main():
                 bricks.append(brick)      
 
         ball = pygame.Rect(screen_width // 2 - 16 // 2, screen_height // 2 - 16 // 2, 16, 16)
-        ball_dx = 5
-        ball_dy = -5
+        ball_dx = 3
+        ball_dy = -3
 
         paddle = pygame.Rect(screen_width // 2 - 80 // 2, screen_height - 16, 80, 16)
         paddle_dx = 0
@@ -55,9 +55,9 @@ def main():
                     running = False
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
-                        paddle_dx = -10
+                        paddle_dx = -7
                     elif event.key == pygame.K_RIGHT:
-                        paddle_dx = 10
+                        paddle_dx = 7
                 elif event.type == pygame.KEYUP:
                     if event.key == pygame.K_LEFT:
                         paddle_dx = 0
@@ -79,12 +79,12 @@ def main():
                 ball.top = 0
                 ball_dy = -ball_dy
             elif ball.top >= screen_height:
-                missed += 1
+                missed -= 1
                 ball.left = screen_width // 2 - ball.width // 2
                 ball.top = screen_height // 2 - ball.width // 2
                 ball_dy = -ball_dy 
 
-            if missed >= 3:
+            if missed <= 0:
                 game_over = FAILURE 
 
             if paddle.left < 0:
@@ -118,10 +118,10 @@ def main():
 
             pygame.draw.rect(screen, BLUE, paddle)
 
-            score_image = small_font.render('Point {}'.format(score), True, YELLOW)
+            score_image = small_font.render('점수 {}'.format(score), True, YELLOW)
             screen.blit(score_image, (10, 10))
 
-            missed_image = small_font.render('Missed {}'.format(missed), True, YELLOW)
+            missed_image = small_font.render('목숨 {}'.format(missed), True, YELLOW)
             screen.blit(missed_image, missed_image.get_rect(right=screen_width - 10, top=10))
 
             if game_over > 0:
