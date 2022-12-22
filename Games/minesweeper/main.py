@@ -1,6 +1,7 @@
 import pygame 
 import random
 import sys
+import Modules.Functions as F
 
 def main():
     pygame.init() 
@@ -10,8 +11,8 @@ def main():
     GRAY = (128, 128, 128)
     WHITE = (255, 255, 255)
     YELLOW = (255, 255, 0)
-    large_font = pygame.font.SysFont(None, 72)
-    small_font = pygame.font.SysFont(None, 36)
+    large_font = pygame.font.SysFont("malgungothic", 72)
+    small_font = pygame.font.SysFont("malgungothic", 36)
     SCREEN_WIDTH = 800
     SCREEN_HEIGHT = 600
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -129,11 +130,23 @@ def main():
 
             if game_over > 0:
                 if game_over == SUCCESS:
-                    success_image = large_font.render('Success', True, RED)
+                    success_image = large_font.render('성공', True, RED)
+                    screen.fill(GRAY)
                     screen.blit(success_image, success_image.get_rect(centerx=SCREEN_WIDTH // 2, centery=SCREEN_HEIGHT // 2))
+                    while True:
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                return
+                        pygame.display.update()
                 elif game_over == FAILURE:
-                    failure_image = large_font.render('Failure', True, RED)
+                    failure_image = large_font.render('실패', True, RED)
+                    screen.fill(GRAY)
                     screen.blit(failure_image, failure_image.get_rect(centerx=SCREEN_WIDTH // 2, centery=SCREEN_HEIGHT // 2))
+                    while True:
+                        for event in pygame.event.get():
+                            if event.type == pygame.QUIT:
+                                return
+                        pygame.display.update()
 
             pygame.display.update() 
 
