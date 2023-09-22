@@ -15,7 +15,7 @@ def main():
     size = [800, 500]
     screen = pygame.display.set_mode(size) 
 
-    Font = pygame.font.SysFont("malgungothic", 30)
+    Font = pygame.font.SysFont("malgungothic", 60)
 
     clock = pygame.time.Clock()
 
@@ -33,7 +33,7 @@ def main():
             bombs.append({'rect': rect, 'dy': dy})
 
         person_image = pygame.image.load(Img_Dir + 'person.png')
-        person_image = pygame.transform.scale(person_image, (100, 100))
+        person_image = pygame.transform.scale(person_image, (50, 100))
         person = pygame.Rect(person_image.get_rect())
         person.left = size[0] // 2 - person.width // 2
         person.top = size[1] - person.height
@@ -85,7 +85,7 @@ def main():
                 screen.blit(bomb_image, bomb['rect'])
             
             if done:
-                GO = F.Text("Game Over", Font, WHITE)
+                GO = F.Text("사망", Font, WHITE)
                 GO.rect.centerx = round(size[0] / 2)
                 GO.rect.centery = round(size[1] / 2)
 
